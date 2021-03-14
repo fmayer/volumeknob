@@ -72,8 +72,10 @@ void hid_task() {
   }
 
   if (tud_hid_ready()) {
-    int x = val;
-    val = 0;
+    auto saved = save_and_disable_interrupts();
+    int x = val / 2;
+    val = val % 2;
+    restore_interrupts(saved);
     uint16_t key;
     if (x < 0) {
       key = HID_USAGE_CONSUMER_VOLUME_DECREMENT;
