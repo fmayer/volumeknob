@@ -80,11 +80,8 @@ void hid_task() {
     } else if (x > 0) {
       key = HID_USAGE_CONSUMER_VOLUME_INCREMENT;
     }
-    if (x != 0) {
-      x = abs(x);
-      for (int i = 0; i < x; ++i) {
-        tud_hid_report(REPORT_ID_CONSUMER, &key, sizeof(key));
-      }
+    for (int i = 0; i < abs(x); ++i) {
+      tud_hid_report(REPORT_ID_CONSUMER, &key, sizeof(key));
     }
   }
 }
