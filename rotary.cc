@@ -40,16 +40,25 @@ void interruptCallback(uint gpio, uint32_t events) {
   }
   uint32_t vals = gpio_get_all();
   uint32_t changed_vals = vals ^ prev_vals;
-  // We only consider when our chosen phase changes.
-  if (~changed_vals & (1 << rotaryAGpio)) {
-    return;
-  }
-  // Only take one of the up-down.
-  if ((changed_vals & vals) & (1 << rotaryBGpio)) {
-    if (vals & (1 << rotaryAGpio)) {
-      val--;
-    } else {
-      val++;
+
+  const bool a = vals & (1 << rotaryAGpio);
+  const bool b = vals & (1 << rotaryBGpio);
+  const bool a_changed = changed_vals & (1 << rotaryAGpio);
+  const bool b_changed = changed_vals & (1 << rotaryBGpio);
+
+  if (a_changed ^ b_changed) {
+    if (a_changed) {
+      if (a != b) {
+        val++;
+      } else {
+        val--;
+      }
+    } else if (b_changed) {
+      if (a == b) {
+        val++;
+      } else {
+        val--;
+      }
     }
   }
   prev_vals = vals;

@@ -58,17 +58,13 @@ int main() {
   return 0;
 }
 
-void tud_mount_cb() {
-}
+void tud_mount_cb() {}
 
-void tud_umount_cb() {
-}
+void tud_umount_cb() {}
 
-void tud_suspend_cb(bool) {
-}
+void tud_suspend_cb(bool) {}
 
-void tud_resume_cb() {
-}
+void tud_resume_cb() {}
 
 void hid_task() {
   if (tud_suspended()) {
@@ -93,10 +89,7 @@ void hid_task() {
   }
 }
 
-uint16_t tud_hid_get_report_cb(uint8_t,
-                               hid_report_type_t,
-                               uint8_t*,
-                               uint16_t) {
+uint16_t tud_hid_get_report_cb(uint8_t, hid_report_type_t, uint8_t*, uint16_t) {
   return 0;
 }
 
