@@ -25,13 +25,14 @@
 #include "pico/types.h"
 
 namespace {
+bool first_interrupt = true;
 uint32_t prev_vals;
 constexpr auto buttonGpio = 19;
 constexpr auto rotaryAGpio = 22;
 constexpr auto rotaryBGpio = 21;
 }  // namespace
 
-volatile int val;
+volatile int val = 0;
 
 void interruptCallback(uint gpio, uint32_t events) {
   if (gpio == buttonGpio) {
@@ -39,6 +40,11 @@ void interruptCallback(uint gpio, uint32_t events) {
     return;
   }
   uint32_t vals = gpio_get_all();
+  if (first_interrupt) {
+    first_interrupt = false;
+    prev_vals = vals;
+    return;
+  }
   uint32_t changed_vals = vals ^ prev_vals;
 
   const bool a = vals & (1 << rotaryAGpio);
