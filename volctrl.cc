@@ -58,14 +58,6 @@ int main() {
   return 0;
 }
 
-void tud_mount_cb() {}
-
-void tud_umount_cb() {}
-
-void tud_suspend_cb(bool) {}
-
-void tud_resume_cb() {}
-
 void hid_task() {
   if (tud_suspended()) {
     tud_remote_wakeup();
