@@ -66,7 +66,11 @@ void hid_task() {
   if (tud_hid_ready()) {
     auto saved = save_and_disable_interrupts();
     int x = val / 2;
-    val = val % 2;
+    if (val < 0) {
+      val = -abs(val % 2);
+    } else {
+      val = val % 2;
+    }
     restore_interrupts(saved);
     uint16_t key;
     if (x < 0) {
