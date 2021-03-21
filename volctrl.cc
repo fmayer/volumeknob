@@ -67,7 +67,7 @@ void hid_task() {
     auto saved = save_and_disable_interrupts();
     int x = val / 2;
     if (val < 0) {
-      val = -abs(val % 2);
+      val = -(abs(val) % 2);
     } else {
       val = val % 2;
     }
