@@ -1,4 +1,4 @@
-Use an [EC11 Rotary Encoder] and a [Raspberry Pi] Pico to control your
+Use an [EC11 Rotary Encoder] and a [Raspberry Pi Pico] to control your
 computer's volume.
 
 ![](box.jpg)
